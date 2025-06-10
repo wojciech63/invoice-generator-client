@@ -24,6 +24,7 @@ const LandingPage = () => {
                     <h1 className="hero-title">Create. Manage. Grow.</h1>
                     <p className="hero-subtitle">Your invoices, simplified and automated.</p>
                     <button className="cta-btn">Start Now</button>
+                    <button className="learn-more-btn">Learn More</button>
                 </div>
             </section>
 
@@ -54,7 +55,7 @@ const LandingPage = () => {
 
             {/* Footer Section */}
             <footer className="footer">
-                <p>&copy; 2025 Invoice Generator. All rights reserved.</p>
+                <p>&copy; {new Date().getFullYear()} Invoice Generator. All rights reserved.</p>
             </footer>
         </div>
     );
