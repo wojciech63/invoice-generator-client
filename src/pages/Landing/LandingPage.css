@@ -1,0 +1,160 @@
+/* Global Styles */
+.landing-page {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: white;
+    background-color: #f4f7fa;
+    overflow: hidden;
+}
+
+/* Hero Section */
+.hero {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(20deg, #0066cc, #ff6600); /* Blue to orange gradient */
+    color: white;
+    text-align: center;
+    z-index: 0;
+    background-size: 200% 200%;
+    animation: gradientAnimation 10s ease infinite;
+    transition: background 0.5s ease;
+}
+
+.hero-content {
+    z-index: 10;
+}
+
+.hero-title {
+    font-size: 4rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.hero-subtitle {
+    font-size: 1.3rem;
+    margin-bottom: 40px;
+    font-weight: 300;
+}
+
+.cta-btn {
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    background-color: #ff6600;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.cta-btn:hover {
+    background-color: #ff5500;
+    transform: scale(1.1);
+}
+
+/* Smooth gradient animation */
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Parallax Section with color update */
+.parallax {
+    background: linear-gradient(135deg, #003366, #0066cc); /* Darker blue tones */
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    color: white;
+    padding: 100px 0;
+    text-align: center;
+    transform: scale(1.1);
+    transition: transform 0.3s ease;
+}
+
+.parallax h2 {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.parallax p {
+    font-size: 1.2rem;
+}
+
+/* Features Section */
+.features {
+    padding: 60px 20px;
+    background-color: #ffffff;
+    color: #333333;
+    text-align: center;
+}
+
+.features h2 {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    color: #0066cc; /* Blue title color */
+}
+
+.feature-cards {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.feature-card {
+    background: #f4f7fa;
+    padding: 40px;
+    border-radius: 10px;
+    width: 300px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    color: #333333;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.feature-card:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.feature-card h3 {
+    font-size: 1.7rem;
+    margin-bottom: 15px;
+}
+
+.feature-card p {
+    font-size: 1.1rem;
+}
+
+/* Footer Section */
+.footer {
+    padding: 20px;
+    background-color: #0066cc;
+    text-align: center;
+}
+
+.footer p {
+    font-size: 1rem;
+    color: #ffffff;
+}
+
+/* Smooth Hover Scaling */
+.feature-card:hover,
+.cta-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
