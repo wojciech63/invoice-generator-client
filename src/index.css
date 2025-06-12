@@ -24,3 +24,14 @@
 .invoiceform select:focus{
     box-shadow: none !important;
 }
+
+
+.previewpage .invoice-preview {
+    width: 794px;
+    min-height: 1123px;
+    background: #ffffff;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
+    margin: 0 auto;
+    padding: 0;
+    overflow: hidden;
+}
