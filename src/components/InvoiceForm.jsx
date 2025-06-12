@@ -115,11 +115,51 @@ const InvoiceForm = () => {
                 <button className="btn btn-primary" type="button">Add Item</button>
             </div>
             {/* Bank details */}
-            <div className="mb-4"></div>
+            <div className="mb-4">
+                <h5>Bank Account Details</h5>
+                <div className="row g-3">
+                    <div className="col-md-4">
+                        <input type="text" className="form-control" placeholder="Recipent name"/>
+                    </div>
+                    <div className="col-md-4">
+                        <input type="text" className="form-control" placeholder="IBAN"/>
+                    </div>
+                    <div className="col-md-4">
+                        <input type="text" className="form-control" placeholder="Bank SWIFT"/>
+                    </div>
+                </div>
+            </div>
             {/* Total */}
-            <div className="mb-4"></div>
+            <div className="mb-4">
+                <h5>Totals</h5>
+                <div className="d-flex justify-content-end">
+                    <div className="w-100 w-md-50">
+                        <div className="d-flex justify-content-between">
+                            <span>Subtotal</span>
+                            <span>${1000}</span>
+                        </div>
+                        <div className="d-flex justify-content-between align-items-center my-2">
+                            <label htmlFor="taxInput" className="me-2">Tax Rate (%)</label>
+                            <input type="number" id="taxInput" className="form-control w-50 text-end" placeholder="Input tax rate in %" />
+                        </div>
+                        <div className="d-flex justify-content-between">
+                            <span>Tax amount</span>
+                            <span>${1000}</span>
+                        </div>
+                        <div className="d-flex justify-content-between fw-bold mt-2">
+                            <span>Grand Total</span>
+                            <span>${1000}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
             {/* Notes */}
-            <div className="mb-4"></div>
+            <div className="mb-4">
+                <h5>Notes:</h5>
+                <div className="w-100">
+                    <textarea name="notes" className="form-control" rows={3}></textarea>
+                </div>
+            </div>
 
         </div>
     )
