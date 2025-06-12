@@ -1,13 +1,36 @@
-import { useState } from "react";
+import {useContext, useState} from "react";
 import { PencilIcon } from "lucide-react";
 import InvoiceForm from "../components/InvoiceForm.jsx";
 import TemplateGrid from "../components/TemplateGrid.jsx";
+import toast from "react-hot-toast";
+import {AppContext} from "../context/AppContext.jsx";
 
 const MainPage = () => {
     const [isEditingTitle, setIsEditingTitle] = useState(false);
-    const [title, setTitle] = useState("Invoice Generator");
+    const {
+        title, setTitle,
+        invoiceData, setInvoiceData,
+        setSelectedTemplate
+    } = useContext(AppContext);
 
-    const handleTitleChange = (e) => setTitle(e.target.value);
+    const handleTemplateClick = (templateId) => {
+        const hasInvalidItem = invoiceData.items.some(
+            (item) => !item.qty || !item.amount
+        );
+
+        if (hasInvalidItem) {
+            toast.error("Please enter quantity and amount for all items")
+            return;
+        }
+        setSelectedTemplate(templateId);
+    };
+
+    const handleTitleChange = (e) => {
+        const newTitle = e.target.value;
+        setTitle(newTitle);
+        setInvoiceData(prev => ({ ...prev, title: newTitle }));
+    };
+
 
     return (
         <div className="mainpage container-fluid bg-light min-vh-100 py-4">
@@ -49,7 +72,7 @@ const MainPage = () => {
                     {/* Template grid */}
                     <div className="col-12 col-lg-6 d-flex">
                         <div className="bg-white border rounded shadow-sm p-4 w-100">
-                            <TemplateGrid/>
+                            <TemplateGrid onTemplateClick={handleTemplateClick} />
                         </div>
                     </div>
                 </div>

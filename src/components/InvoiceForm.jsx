@@ -403,13 +403,6 @@ const InvoiceForm = () => {
                 </div>
             </div>
 
-            {/* FIX: Added text and styling to the submit button */}
-            <div className="text-end">
-                <button className="btn btn-success" onClick={handleSubmit}>
-                    Generate Invoice
-                </button>
-            </div>
-
         </div>
     )
 }
