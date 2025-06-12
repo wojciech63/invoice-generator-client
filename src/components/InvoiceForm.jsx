@@ -1,7 +1,21 @@
 import {assets} from "../assets/assets.js";
 import {Trash2} from "lucide-react";
+import {useContext} from "react";
+import {AppContext} from "../context/AppContext.jsx";
 
 const InvoiceForm = () => {
+    const {invoiceData, setInvoiceData} = useContext(AppContext);
+
+    const addItem = () => {
+        setInvoiceData((prev => ({
+            ...prev,
+            items: [,
+            ...prev.items,
+            {name: "", qty: "", amount: "", description: "", total: 0 }
+                ]
+        })))
+    };
+
     return (
         <div className="invoiceform container py-4">
 
@@ -90,7 +104,8 @@ const InvoiceForm = () => {
             {/* Item details */}
             <div className="mb-4">
                 <h5>Item Details</h5>
-                <div className="card p-3 mb-3">
+                {invoiceData.items.map((item, index) => (
+                    <div key={index} className="card p-3 mb-3">
                     <div className="row g-3 mb-2">
                         <div className="col-md-3">
                             <input type="text" className="form-control" placeholder="Item Name"/>
@@ -107,12 +122,15 @@ const InvoiceForm = () => {
                     </div>
                     <div className="d-flex gap-2">
                         <textarea className="form-control" placeholder="Description"></textarea>
+                        {invoiceData.items.length > 1 && (
                         <button className="btn btn-outline-danger" type="button">
                             <Trash2 size={18} />
                         </button>
+                        )}
                     </div>
                 </div>
-                <button className="btn btn-primary" type="button">Add Item</button>
+                ))}
+                <button className="btn btn-primary" type="button" onClick={addItem}>Add Item</button>
             </div>
             {/* Bank details */}
             <div className="mb-4">
