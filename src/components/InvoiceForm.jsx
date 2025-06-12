@@ -16,6 +16,11 @@ const InvoiceForm = () => {
         })))
     };
 
+    const deleteItem = (index) => {
+        const items =invoiceData.items.filter((_, i) => i !== index)
+        setInvoiceData((prev) => ({...prev, items}));
+    }
+
     return (
         <div className="invoiceform container py-4">
 
@@ -123,7 +128,7 @@ const InvoiceForm = () => {
                     <div className="d-flex gap-2">
                         <textarea className="form-control" placeholder="Description"></textarea>
                         {invoiceData.items.length > 1 && (
-                        <button className="btn btn-outline-danger" type="button">
+                        <button className="btn btn-outline-danger" type="button" onClick={() => deleteItem(index)}>
                             <Trash2 size={18} />
                         </button>
                         )}
