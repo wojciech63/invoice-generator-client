@@ -47,6 +47,30 @@ const InvoiceForm = () => {
         setInvoiceData((prev) => ({...prev, items}));
     }
 
+    const calculateTotals = () => {
+        const subtotal = invoiceData.items.reduce((sum, item) => sum + (item.total || 0), 0)
+        const taxRate = Number(invoiceData.tax || 0);
+        const taxAmount = (subtotal / taxRate) / 100;
+        const grandTotal = subtotal + taxAmount;
+        return {subtotal, taxAmount, grandTotal};
+    }
+
+    const {subtotal, taxAmount, grandTotal} = calculateTotals();
+
+    const handleLogoUpload = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setInvoiceData((prev) => ({
+                    ...prev,
+                    logo: reader.result
+                }))
+            };
+            reader.readAsDataURL(file);
+        }
+    }
+
     return (
         <div className="invoiceform container py-4">
 
@@ -55,10 +79,16 @@ const InvoiceForm = () => {
                 <h5>Company Logo</h5>
                 <div className="d-flex align-items-center gap-3">
                     <label htmlFor="image" className="form-label">
-                        <img src={assets.upload_area} alt="upload" width={98}/>
+                        <img src={invoiceData.logo ? invoiceData.log : assets.upload_area} alt="upload" width={98}/>
                         <div>Click to upload your logo</div>
                     </label>
-                    <input type="file" name="logo" id="image" hidden className="form-control" accept="image/*" />
+                    <input type="file"
+                           name="logo"
+                           id="image"
+                           hidden
+                           className="form-control"
+                           accept="image/*"
+                           onChange={handleLogoUpload}/>
                 </div>
             </div>
             {/* Company info */}
@@ -305,7 +335,7 @@ const InvoiceForm = () => {
                     <div className="w-100 w-md-50">
                         <div className="d-flex justify-content-between">
                             <span>Subtotal</span>
-                            <span>${1000}</span>
+                            <span>${subtotal.toFixed(2)}</span>
                         </div>
                         <div className="d-flex justify-content-between align-items-center my-2">
                             <label htmlFor="taxInput" className="me-2">Tax Rate (%)</label>
@@ -321,11 +351,11 @@ const InvoiceForm = () => {
 
                         <div className="d-flex justify-content-between">
                             <span>Tax amount</span>
-                            <span>${1000}</span>
+                            <span>${taxAmount.toFixed(2)}</span>
                         </div>
                         <div className="d-flex justify-content-between fw-bold mt-2">
                             <span>Grand Total</span>
-                            <span>${1000}</span>
+                            <span>${grandTotal.toFixed(2)}</span>
                         </div>
                     </div>
                 </div>
