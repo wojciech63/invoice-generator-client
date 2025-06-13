@@ -21,13 +21,13 @@ export const initialInvoiceData = {
 
 export const AppContextProvider = ({ children }) => {
 
-    const [invoiceTitle, setInvoiceTitle] = useState("New Invoice");
+    const [title, setTitle] = useState("New Invoice");
 
     const [invoiceData, setInvoiceData] = useState(initialInvoiceData);
     const [selectedTemplate, setSelectedTemplate] = useState("template");
 
     const contextValue = {
-        invoiceTitle, setInvoiceTitle,
+        title, setTitle,
         invoiceData, setInvoiceData,
         selectedTemplate, setSelectedTemplate,
         initialInvoiceData,

@@ -16,43 +16,28 @@ const PreviewPage = () => {
     const navigate = useNavigate();
 
     const handleSaveAndExit = async () => {
-        if (!previewRef.current) return toast.error("Preview not available");
-
-        try {
+        try{
             setLoading(true);
-
-            const canvas = await html2canvas(previewRef.current, {
-                scale: 2,
-                useCORS: true,
-                backgroundColor: "#fff",
-                scrollY: -window.scrollY,
-            });
-
-            const imageData = canvas.toDataURL("image/png");
-            const thumbnailUrl = await uploadInvoiceThumbnail(imageData);
-
+            //TODO: create thumbnail url
             const payload = {
                 ...invoiceData,
-                clerkId: user.id,
-                thumbnailUrl,
                 template: selectedTemplate,
-            };
-            const token = await getToken();
-            const response = await saveInvoice(baseURL, payload, token);
-
-            if (response.status === 200) {
-                toast.success("Invoice saved successfully!");
-                navigate("/dashboard");
-            } else {
-                throw new Error("Save failed");
             }
-        } catch (error) {
-            console.error(error);
-            toast.error("Failed to save invoice");
+            const response = await saveInvoice(baseURL, payload);
+            if(response.status === 200){
+                toast.success("Successfully updated invoice");
+                navigate("/dashboard");
+            }else{
+                toast.error(response.statusText);
+                throw new Error("Failed to update invoice");
+            }
+        }catch(e){
+            console.log(e)
+            toast.error(e.message)
         } finally {
             setLoading(false);
         }
-    };
+    }
 
     return (
         <div className="previewpage container-fluid d-flex flex-column p-3 min-vh-100">
@@ -75,7 +60,7 @@ const PreviewPage = () => {
 
                 {/* List of action buttons */}
                 <div className="d-flex flex-wrap justify-content-center gap-2">
-                    <button className="btn btn-primary d-flex align-items-center justify-content-center" onClick={handleSaveAndExit} disabled={loading}>Save and Exit
+                    <button className="btn btn-primary d-flex align-items-center justify-content-center" onClick={handleSaveAndExit} disabled={loading}>
                         {loading && <Loader2 className="me-2 spin-animation" size={18} />}
                         {loading ? "Saving..." : "Save and Exit"}</button>
                     <button className="btn btn-danger">Delete Invoice</button>
