@@ -80,8 +80,8 @@ const Template1 = ({data}) => {
                             <tr key={index}>
                                 <td className="p-2">{item.name}</td>
                                 <td className="p-2 text-center">{item.qty}</td>
-                                <td className="p-2 text-end">${item.amount?.toFixed(2)}</td>
-                                <td className="p-2 text-end">{(item.qty * item.amount).toFixed(2)}</td>
+                                <td className="p-2 text-end">${Number(item.amount)?.toFixed(2)}</td>
+                                <td className="p-2 text-end">{(Number(item.qty) * Number(item.amount)).toFixed(2)}</td>
                             </tr>
                         ))}
                         </tbody>
