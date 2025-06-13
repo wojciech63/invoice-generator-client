@@ -1,4 +1,4 @@
-import {useContext, useRef} from "react";
+import {useContext, useRef, useState} from "react";
 import button from "bootstrap/js/src/button.js";
 import {templates} from "../assets/assets.js";
 import {AppContext} from "../context/AppContext.jsx";
@@ -7,7 +7,18 @@ import InvoicePreview from "../components/InvoicePreview.jsx";
 
 const PreviewPage = () => {
     const previewRef = useRef();
-    const {selectedTemplate, invoiceData} = useContext(AppContext);
+    const {selectedTemplate, invoiceData, setSelectedTemplate, baseURL} = useContext(AppContext);
+    const [loading, setLoading] = useState(false);
+
+    const handleSaveAndExit = async () => {
+        try{
+            setLoading(true);
+            //TODO: create thumbnail url
+        }catch(e){
+            console.log(e)
+        }
+    }
+
     return (
         <div className="previewpage container-fluid d-flex flex-column p-3 min-vh-100">
 
@@ -21,6 +32,7 @@ const PreviewPage = () => {
                             key={id}
                             className={`btn btn-sm rounded-pill p-2 ${
                                 selectedTemplate === id ? 'btn-warning' : 'btn-outline-secondary'}`}
+                            onClick={() => setSelectedTemplate(id)}
                             style={{minWidth: "100px", height: "38px"}}
                         >{label}</button>
                     ))}
@@ -41,7 +53,7 @@ const PreviewPage = () => {
             <div className="flex-grow-1 overflow-auto d-flex justify-content-center align-items-start bg-light py-3">
 
                 <div ref={previewRef} className="invoice-preview">
-                    <InvoicePreview invoiceData={invoiceData} template={{selectedTemplate}} />
+                    <InvoicePreview invoiceData={invoiceData} template={selectedTemplate} />
                 </div>
 
             </div>

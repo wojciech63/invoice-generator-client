@@ -2,6 +2,8 @@ import {createContext, useState} from "react";
 
 export const AppContext = createContext();
 
+const baseURL = "http://localhost:8080/api";
+
 export const initialInvoiceData = {
     title: "New Invoice",
     billing: {name: "", phone: "", address: ""},
@@ -29,6 +31,7 @@ export const AppContextProvider = ({ children }) => {
         invoiceData, setInvoiceData,
         selectedTemplate, setSelectedTemplate,
         initialInvoiceData,
+        baseURL
     }
 
     return(
