@@ -1,7 +1,15 @@
 import {Link, useNavigate} from "react-router-dom";
 import Logo from "./Logo.jsx";
+import {SignedIn, SignedOut, useClerk, UserButton} from "@clerk/clerk-react";
+
 
 const Menubar = () => {
+
+    const {openSignIn} = useClerk();
+
+    const openLogin = () => {
+        openSignIn({});
+    }
 
     const navigate = useNavigate();
 
@@ -32,21 +40,26 @@ const Menubar = () => {
                                 Home
                             </Link>
                         </li>
-                        <li className="nav-item">
-                            <Link className="nav-link fw-medium" to="/dashboard">
-                                Dashboard
-                            </Link>
-                        </li>
-                        <li className="nav-item">
-                            <button className="nav-link fw-medium" onClick={() => navigate("/generate")}>
-                                Generate
-                            </button>
-                        </li>
-                        <li className="nav-item">
-                            <button className="btn btn-primary rounded-pill px-4">
-                                Login/Signup
-                            </button>
-                        </li>
+                        <SignedIn>
+                            <li className="nav-item">
+                                <Link className="nav-link fw-medium" to="/dashboard">
+                                    Dashboard
+                                </Link>
+                            </li>
+                            <li className="nav-item">
+                                <button className="nav-link fw-medium" onClick={() => navigate("/generate")}>
+                                    Generate
+                                </button>
+                            </li>
+                            <UserButton />
+                        </SignedIn>
+                        <SignedOut>
+                            <li className="nav-item">
+                                <button className="btn btn-primary rounded-pill px-4" onClick={() => openLogin()}>
+                                    Login/Signup
+                                </button>
+                            </li>
+                        </SignedOut>
                     </ul>
                 </div>
             </div>
